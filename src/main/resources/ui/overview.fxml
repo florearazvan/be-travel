@@ -13,7 +13,7 @@
       <SplitPane dividerPositions="0.29797979797979796" prefHeight="400.0" prefWidth="800.0" fx:id="splitPane">
         <items>
           <VBox fx:id="navigation">
-              <Button onAction="#switchToUsersView">Users</Button>
+              <Button onAction="#switchToUsersView" fx:id="viewUsers">Users</Button>
               <Button onAction="#switchToMapView">Map</Button>
           </VBox>
           <VBox fx:id="content">

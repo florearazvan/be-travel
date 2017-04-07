@@ -1,9 +1,11 @@
 package com.itec.holzfaller.controllers;
 
+import com.itec.holzfaller.common.LoggedUserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 
 import java.io.IOException;
@@ -14,11 +16,14 @@ public class OverviewController {
     @FXML
     private SplitPane splitPane;
 
+    @FXML
+    private Button viewUsers;
+
     public void initialize() {
         System.out.println("initializing...");
-        for(int i=0; i<splitPane.getItems().size(); i++) {
-            System.out.println(i);
-            System.out.println(splitPane.getItems().get(i));
+
+        if (LoggedUserService.isConsultant()) {
+            viewUsers.setVisible(false);
         }
     }
 
@@ -30,6 +35,10 @@ public class OverviewController {
     public void switchToMapView(ActionEvent actionEvent) {
         System.out.println("switching to map...");
         changeTo("ui/map.fxml");
+    }
+
+    public boolean isAdmin() {
+        return false;
     }
 
     private void changeTo(String pageUrl) {

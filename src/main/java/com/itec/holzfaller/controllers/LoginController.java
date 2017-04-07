@@ -54,7 +54,7 @@ public class LoginController {
 
     private void goToOverview() {
         try {
-            Pane overviewPane = FXMLLoader.load(getClass().getClassLoader().getResource("ui/profile.fxml"));
+            Pane overviewPane = FXMLLoader.load(getClass().getClassLoader().getResource("ui/overview.fxml"));
             BeTravelApplication.changeScene(Constants.APP_NAME, new Scene(overviewPane));
         } catch (IOException e) {
             e.printStackTrace();

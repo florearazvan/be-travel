@@ -20,4 +20,13 @@ public class UserRepo extends Repository<User, Long> {
             return result.size() == 0 ? null : result.get(0);
         });
     }
+
+    public User findByUsername(String username) {
+        return executeWithReturn(entityManager -> {
+            TypedQuery<User> query = entityManager.createQuery("select u from User u where u.username = :username", User.class);
+            query.setParameter("username", username);
+            List<User> result = query.getResultList();
+            return result.size() == 0 ? null : result.get(0);
+        });
+    }
 }
