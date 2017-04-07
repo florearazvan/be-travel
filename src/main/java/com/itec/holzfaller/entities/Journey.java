@@ -1,9 +1,6 @@
 package com.itec.holzfaller.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -14,16 +11,26 @@ public class Journey {
     @GeneratedValue
     private long id;
 
-    private LocalDateTime startDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startDate;
 
-    private LocalDateTime endTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endTime;
 
     private double cost;
 
-    @OneToOne
-    private Location locastion;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private Location location;
 
-    //TODO start date, end date, user, location, cost
+    public Journey() {
+    }
+
+    public Journey(Date startDate, Date endTime, double cost, Location location) {
+        this.startDate = startDate;
+        this.endTime = endTime;
+        this.cost = cost;
+        this.location = location;
+    }
 
     public long getId() {
         return id;
@@ -33,19 +40,19 @@ public class Journey {
         this.id = id;
     }
 
-    public LocalDateTime getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
@@ -57,11 +64,11 @@ public class Journey {
         this.cost = cost;
     }
 
-    public Location getLocastion() {
-        return locastion;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocastion(Location locastion) {
-        this.locastion = locastion;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

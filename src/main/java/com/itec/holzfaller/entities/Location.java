@@ -14,6 +14,12 @@ public class Location {
     private String name;
 
     //TODO add latitude/longitude & maybe user relation???
+    public Location() {
+    }
+
+    public Location(String name) {
+        this.name = name;
+    }
 
     public long getId() {
         return id;

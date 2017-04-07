@@ -1,8 +1,7 @@
 package com.itec.holzfaller.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -15,9 +14,11 @@ public class User {
     private String password;
     private String email;
 
-    //TODO add location
-    //TODO add journey
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Journey> journeys;
 
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Location location;
 
     public User() {
     }
@@ -58,5 +59,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Journey> getJourneys() {
+        return journeys;
+    }
+
+    public void setJourneys(List<Journey> journeys) {
+        this.journeys = journeys;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
