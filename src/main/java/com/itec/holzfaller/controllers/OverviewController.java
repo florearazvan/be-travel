@@ -2,11 +2,14 @@ package com.itec.holzfaller.controllers;
 
 import com.itec.holzfaller.common.LoggedUserService;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,12 +22,20 @@ public class OverviewController {
     @FXML
     private Button viewUsers;
 
-    public void initialize() {
-        System.out.println("initializing...");
+    @FXML
+    private Label loggedinUser;
 
+    public void initialize() {
+        loggedinUser.setText(LoggedUserService.loggedUser.getUsername());
         if (LoggedUserService.isConsultant()) {
             viewUsers.setVisible(false);
         }
+        loggedinUser.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                switchToMapView();
+            }
+        });
     }
 
     public void switchToUsersView(ActionEvent actionEvent) {
@@ -41,7 +52,7 @@ public class OverviewController {
         return false;
     }
 
-    private void changeTo(String pageUrl) {
+    protected void changeTo(String pageUrl) {
         try {
             URL url = getClass().getClassLoader().getResource(pageUrl);
             Parent root = FXMLLoader.load(url);
@@ -49,6 +60,10 @@ public class OverviewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void switchToMapView() {
+        changeTo("ui/profile.fxml");
     }
 
 }
