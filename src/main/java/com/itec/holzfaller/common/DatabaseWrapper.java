@@ -8,8 +8,6 @@ import java.util.function.Function;
 
 public class DatabaseWrapper {
 
-    private static final String PERSISTENCE_UNIT = "test-db";
-
     private EntityManager em;
     private EntityManagerFactory emFactory;
 
@@ -62,6 +60,6 @@ public class DatabaseWrapper {
     }
 
     private EntityManagerFactory createEntityManagerFactory() {
-        return Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
+        return Persistence.createEntityManagerFactory(Constants.PERSISTANCE_UNIT_NAME);
     }
 }

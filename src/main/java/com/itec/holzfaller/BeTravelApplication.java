@@ -1,6 +1,8 @@
 package com.itec.holzfaller;
 
 import com.itec.holzfaller.common.Constants;
+import com.itec.holzfaller.entities.User;
+import com.itec.holzfaller.repository.UserRepo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +17,18 @@ public class BeTravelApplication extends Application {
 
     public static void main(String[] args) {
         //TODO maybe here open another thread for the CLI
+
+        initDefaultUser();
         launch(args);
+    }
+
+    private static void initDefaultUser() {
+        UserRepo userRepo = new UserRepo();
+        if (userRepo.findOne(1L) == null) {
+            User defaultUser = new User("admin", "admin", "admin@itec.com");
+            userRepo.save(defaultUser);
+        }
+
     }
 
     @Override
