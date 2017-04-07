@@ -1,6 +1,7 @@
 package com.itec.holzfaller;
 
 import com.itec.holzfaller.common.Constants;
+import com.itec.holzfaller.common.LoggedUserService;
 import com.itec.holzfaller.entities.Journey;
 import com.itec.holzfaller.entities.Location;
 import com.itec.holzfaller.entities.Role;

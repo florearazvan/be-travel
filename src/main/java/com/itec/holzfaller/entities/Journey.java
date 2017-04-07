@@ -1,7 +1,6 @@
 package com.itec.holzfaller.entities;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -15,7 +14,7 @@ public class Journey {
     private Date startDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;
+    private Date endDate;
 
     private double cost;
 
@@ -25,9 +24,9 @@ public class Journey {
     public Journey() {
     }
 
-    public Journey(Date startDate, Date endTime, double cost, Location location) {
+    public Journey(Date startDate, Date endDate, double cost, Location location) {
         this.startDate = startDate;
-        this.endTime = endTime;
+        this.endDate = endDate;
         this.cost = cost;
         this.location = location;
     }
@@ -48,12 +47,12 @@ public class Journey {
         this.startDate = startDate;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public double getCost() {

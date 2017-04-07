@@ -2,6 +2,8 @@ package com.itec.holzfaller.controllers;
 
 import com.itec.holzfaller.BeTravelApplication;
 import com.itec.holzfaller.common.Constants;
+import com.itec.holzfaller.common.LoggedUserService;
+import com.itec.holzfaller.entities.User;
 import com.itec.holzfaller.services.LoginService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,9 +37,12 @@ public class LoginController {
         String username = usernameTextField.getText() == null ? "" : usernameTextField.getText();
         String password = passwordTextField.getText() == null ? "" : passwordTextField.getText();
 
-        if (loginService.loginUser(username, password)) {
+        User loginUser = loginService.loginUser(username, password);
+
+        if (loginUser != null) {
             System.out.println("found user...");
 
+            LoggedUserService.loggedUser = loginUser;
             goToOverview();
         } else {
             System.out.println("invalid credentials...");
@@ -49,7 +54,7 @@ public class LoginController {
 
     private void goToOverview() {
         try {
-            Pane overviewPane = FXMLLoader.load(getClass().getClassLoader().getResource("ui/overview.fxml"));
+            Pane overviewPane = FXMLLoader.load(getClass().getClassLoader().getResource("ui/profile.fxml"));
             BeTravelApplication.changeScene(Constants.APP_NAME, new Scene(overviewPane));
         } catch (IOException e) {
             e.printStackTrace();
