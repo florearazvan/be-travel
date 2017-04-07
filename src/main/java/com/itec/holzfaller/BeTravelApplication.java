@@ -3,6 +3,7 @@ package com.itec.holzfaller;
 import com.itec.holzfaller.common.Constants;
 import com.itec.holzfaller.entities.Journey;
 import com.itec.holzfaller.entities.Location;
+import com.itec.holzfaller.entities.Role;
 import com.itec.holzfaller.entities.User;
 import com.itec.holzfaller.repository.UserRepo;
 import javafx.application.Application;
@@ -29,8 +30,9 @@ public class BeTravelApplication extends Application {
     private static void initDefaultUser() {
         UserRepo userRepo = new UserRepo();
         if (userRepo.findOne(1L) == null) {
-            User defaultUser = new User("admin", "admin", "admin@itec.com");
+            User defaultUser = new User("admin", "admin", "admin@itec.com", Role.ADMIN);
             defaultUser.setJourneys(Arrays.asList(new Journey(new Date(), new Date(), 10.0, new Location("Timisoara"))));
+            defaultUser.setLocation(new Location("Timisoara"));
             userRepo.save(defaultUser);
         }
     }
