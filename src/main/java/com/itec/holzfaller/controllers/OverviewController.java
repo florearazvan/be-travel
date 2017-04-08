@@ -67,4 +67,9 @@ public class OverviewController {
         System.out.println("switching to reports...");
         changeTo("ui/report.fxml");
     }
+
+    public void switchImportView(ActionEvent actionEvent) {
+        System.out.println("switching to import...");
+        changeTo("ui/import.fxml");
+    }
 }

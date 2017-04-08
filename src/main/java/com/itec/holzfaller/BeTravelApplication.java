@@ -8,12 +8,15 @@ import com.itec.holzfaller.entities.Role;
 import com.itec.holzfaller.entities.User;
 import com.itec.holzfaller.repository.LocationRepo;
 import com.itec.holzfaller.repository.UserRepo;
+import com.itec.holzfaller.services.ImportService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -25,8 +28,7 @@ public class BeTravelApplication extends Application {
 
     public static void main(String[] args) {
         //TODO maybe here open another thread for the CLI
-
-        initDB();
+//        initDB();
         launch(args);
     }
 

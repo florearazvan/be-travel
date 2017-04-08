@@ -8,7 +8,7 @@ public class Journey {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;

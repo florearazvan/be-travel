@@ -20,6 +20,7 @@
                     <Button fx:id="viewUsers" onAction="#switchToUsersView">Users</Button>
                     <Button onAction="#switchProfileView">Map</Button>
                     <Button onAction="#switchReportView">Report</Button>
+                    <Button onAction="#switchImportView">Import</Button>
                 </VBox>
             </SplitPane>
             <VBox fx:id="content">

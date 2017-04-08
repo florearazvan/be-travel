@@ -11,7 +11,7 @@ public class Location {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     private String name;
     private double latitude;
