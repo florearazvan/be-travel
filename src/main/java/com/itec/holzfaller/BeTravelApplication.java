@@ -6,6 +6,7 @@ import com.itec.holzfaller.entities.Journey;
 import com.itec.holzfaller.entities.Location;
 import com.itec.holzfaller.entities.Role;
 import com.itec.holzfaller.entities.User;
+import com.itec.holzfaller.repository.LocationRepo;
 import com.itec.holzfaller.repository.UserRepo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,26 +25,41 @@ public class BeTravelApplication extends Application {
     public static void main(String[] args) {
         //TODO maybe here open another thread for the CLI
 
-        initDefaultUser();
+        initDB();
         launch(args);
     }
 
-    private static void initDefaultUser() {
+    private static void initDB() {
+        LocationRepo locationRepo = new LocationRepo();
+        Location muc = new Location("München", 48.15, 11.26, "#2c5d9d");
+        Location tm = new Location("Timișoara", 45.74, 21.14, "#bcdf46");
+        Location frk = new Location("Frankfurt am Main", 50.12, 8.49, "#a31919");
+        Location wien = new Location("Wien", 48.22, 16.09, "#0c6e48");
+        Location ams = new Location("Amsterdam", 52.34, 4.75, "#ff8000");
+        Location hun = new Location("Hunedoara", 45.76, 22.87, "#ff8000");
+
+        locationRepo.save(muc);
+        tm = locationRepo.update(tm);
+        locationRepo.save(frk);
+        locationRepo.save(wien);
+        locationRepo.save(ams);
+        hun = locationRepo.update(hun);
+
         UserRepo userRepo = new UserRepo();
         if (userRepo.findByUsername("admin") == null) {
             User defaultUser = new User("admin", "admin", "admin@itec.com", Role.ADMIN);
             defaultUser.setJourneys(
-                    Arrays.asList(new Journey(new Date(), new Date(), 10.0, new Location("Timisoara", 45.7494, 21.2272, Constants.RED)),
-                            new Journey(new Date(), new Date(), 10.0, new Location("Hunedoara", 45.77, 22.92, Constants.BLUE))));
-            defaultUser.setLocation(new Location("Timisoara", 45.7494, 21.2272, Constants.RED));
-            userRepo.save(defaultUser);
+                    Arrays.asList(new Journey(new Date(), new Date(), 10.0, tm),
+                            new Journey(new Date(), new Date(), 10.0, hun)));
+            defaultUser.setLocation(tm);
+            userRepo.update(defaultUser);
         }
 
         if (userRepo.findByUsername("user") == null) {
             User consultant = new User("user", "user", "user@itec.com", Role.CONSULTANT);
-            consultant.setJourneys(Arrays.asList(new Journey(new Date(), new Date(), 10.0, new Location("Hunedoara", 45.77, 22.92, Constants.BLUE))));
-            consultant.setLocation(new Location("Hunedoara",45.77, 22.92, Constants.BLUE));
-            userRepo.save(consultant);
+            consultant.setJourneys(Arrays.asList(new Journey(new Date(), new Date(), 10.0, hun)));
+            consultant.setLocation(hun);
+            userRepo.update(consultant);
         }
     }
 

@@ -2,19 +2,30 @@ package com.itec.holzfaller.controllers;
 
 import com.itec.holzfaller.common.LoggedUserService;
 import com.itec.holzfaller.entities.Journey;
+import com.itec.holzfaller.entities.Location;
 import com.itec.holzfaller.entities.User;
+import com.itec.holzfaller.repository.LocationRepo;
 import com.itec.holzfaller.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Optional;
 
 
 /**
@@ -23,6 +34,7 @@ import java.io.IOException;
 public class ProfileController{
 
     private UserService userService = new UserService();
+    private LocationRepo locationRepo = new LocationRepo();
 
     @FXML
     private TextField username;
@@ -47,6 +59,7 @@ public class ProfileController{
     private User currentUser;
 
     public void initialize(){
+        currentUser = userService.findByUsername(LoggedUserService.username);
         populateFields();
         populateTable();
         addChangeListeners();
@@ -57,7 +70,7 @@ public class ProfileController{
             column.setCellValueFactory(new PropertyValueFactory<Journey, String>(column.getId()));
         }
         ObservableList<Journey> data =
-                FXCollections.observableArrayList(LoggedUserService.loggedUser.getJourneys());
+                FXCollections.observableArrayList(currentUser.getJourneys());
         journeysTable.setItems(data);
         saveButton.setOnAction(event -> saveUser());
         addJourneyLink.setOnAction(event -> showAddJourneyPopUp());
@@ -94,10 +107,59 @@ public class ProfileController{
         currentUser.setPassword(password.getText());
         currentUser.setEmail(email.getText());
         currentUser = userService.update(currentUser);
+        currentStage.close();
     }
 
     private void showAddJourneyPopUp() {
+        Journey newJourney = showPopupAndCreateJourney();
+        currentUser.getJourneys().add(newJourney);
+        populateTable();
+        saveButton.setDisable(false);
+    }
 
+    private Journey showPopupAndCreateJourney() {
+        Dialog<Journey> dialog = new Dialog<>();
+        dialog.setTitle("Add new journey");
+        dialog.setHeaderText("Add new journey");
+
+        ButtonType addButton = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButton, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        DatePicker startDate = new DatePicker();
+        DatePicker endDate = new DatePicker();
+        ObservableList<Location> locations = FXCollections.observableArrayList(locationRepo.findAll());
+        ComboBox<Location> comboBox = new ComboBox(locations);
+        TextField costTextField = new TextField();
+
+        grid.add(new Label("Start date: "), 0, 0);
+        grid.add(startDate, 1, 0);
+        grid.add(new Label("End date: "), 0, 1);
+        grid.add(endDate, 1, 1);
+        grid.add(new Label("Location: "), 0, 2);
+        grid.add(comboBox,1, 2);
+        grid.add(new Label("Cost: "), 0, 3);
+        grid.add(costTextField,1, 3);
+
+        dialog.setResultConverter(addJurneyButton -> {
+            Date start = getDate(startDate.getValue());
+            Date end = getDate(endDate.getValue());
+            Location location = comboBox.getValue();
+            Double cost = Double.parseDouble(costTextField.getText());
+            return  new Journey(start, end, cost, location);
+        });
+
+        dialog.getDialogPane().setContent(grid);
+        Optional<Journey> journey = dialog.showAndWait();
+        return journey.get();
+    }
+
+    private Date getDate(LocalDate localDate){
+        return Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
     }
 
     public static void showMe(){

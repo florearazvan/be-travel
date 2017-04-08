@@ -70,4 +70,14 @@ public class Journey {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    @Override
+    public String toString() {
+        return "Journey{" +
+                "startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", cost=" + cost +
+                ", location=" + location +
+                '}';
+    }
 }
