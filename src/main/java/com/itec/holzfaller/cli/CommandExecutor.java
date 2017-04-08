@@ -56,6 +56,9 @@ public class CommandExecutor {
             case Commands.LIST_LOCATIONS:
                 return new ListLocationsCommand();
 
+            case Commands.EXPORT:
+                return new ExportCommand();
+
             case Commands.EXIT:
                 System.out.println("bye bye...");
                 System.exit(0);

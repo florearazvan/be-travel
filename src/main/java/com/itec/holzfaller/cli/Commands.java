@@ -17,8 +17,9 @@ public class Commands {
     public static final String DELETE_JOURNEY = "delete-journey";
     public static final String LIST_JOURNEYS = "list-journey";
     public static final String LIST_LOCATIONS = "list-location";
+    public static final String EXPORT = "export";
 
     public static final List<String> ALL_COMMANDS = Arrays.asList(EXIT, LOGIN, EDIT_USER, LIST_USERS,
-            EDIT_LOCATION, ADD_USER, DELETE_USER, ADD_JOURNEY, DELETE_JOURNEY, LIST_JOURNEYS, LIST_LOCATIONS);
+            EDIT_LOCATION, ADD_USER, DELETE_USER, ADD_JOURNEY, DELETE_JOURNEY, LIST_JOURNEYS, LIST_LOCATIONS, EXPORT);
 
 }
