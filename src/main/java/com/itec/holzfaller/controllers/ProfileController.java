@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 
@@ -60,7 +61,12 @@ public class ProfileController{
     private User currentUser;
 
     public void initialize(){
-        currentUser = userService.findByUsername(LoggedUserService.username);
+        if(LoggedUserService.username != "") {
+            currentUser = userService.findByUsername(LoggedUserService.username);
+        } else {
+            currentUser = new User();
+            currentUser.setJourneys(new ArrayList<>());
+        }
         populateFields();
         populateTable();
         saveButton.setOnAction(event -> saveUser());
@@ -119,7 +125,12 @@ public class ProfileController{
 
     private void populateFields() {
         if (LoggedUserService.username != null) {
-            currentUser = userService.findByUsername(LoggedUserService.username);
+            if(LoggedUserService.username != "") {
+                currentUser = userService.findByUsername(LoggedUserService.username);
+            } else {
+                currentUser = new User();
+                currentUser.setJourneys(new ArrayList<>());
+            }
             username.setText(currentUser.getUsername());
             password.setText(currentUser.getPassword());
             email.setText(currentUser.getEmail());

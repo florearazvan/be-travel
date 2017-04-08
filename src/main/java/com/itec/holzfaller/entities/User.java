@@ -88,4 +88,13 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public User(String username, String password, String email, Role role, List<Journey> journeys, Location location) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.journeys = journeys;
+        this.location = location;
+    }
 }

@@ -20,4 +20,8 @@ public class UserService {
     public User update(User user) {
         return userRepo.update(user);
     }
+
+    public void delete(User user){
+        userRepo.delete(user.getId());
+    }
 }
