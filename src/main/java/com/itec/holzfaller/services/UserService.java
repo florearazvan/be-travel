@@ -16,4 +16,8 @@ public class UserService {
     public User findByUsername(String username) {
         return userRepo.findByUsername(username);
     }
+
+    public User update(User user) {
+        return userRepo.update(user);
+    }
 }

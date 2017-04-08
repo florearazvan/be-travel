@@ -14,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import javax.swing.event.HyperlinkListener;
 import java.io.IOException;
 
 
@@ -40,14 +39,17 @@ public class ProfileController{
     @FXML
     private Hyperlink addJourneyLink;
 
-    private static Stage currentStage;
-
     @FXML
     private Button saveButton;
+
+    private static Stage currentStage;
+
+    private User currentUser;
 
     public void initialize(){
         populateFields();
         populateTable();
+        addChangeListeners();
     }
 
     private void populateTable() {
@@ -59,20 +61,39 @@ public class ProfileController{
         journeysTable.setItems(data);
         saveButton.setOnAction(event -> saveUser());
         addJourneyLink.setOnAction(event -> showAddJourneyPopUp());
+
     }
 
+    private void addChangeListeners() {
+        username.textProperty().addListener((observable, oldValue, newValue) -> {
+            enableSaveButton();
+        });
+        password.textProperty().addListener((observable, oldValue, newValue) -> {
+            enableSaveButton();
+        });
+        email.textProperty().addListener((observable, oldValue, newValue) -> {
+            enableSaveButton();
+        });
+    }
+
+    private void enableSaveButton() {
+        saveButton.setDisable(false);
+    }
 
     private void populateFields() {
         if (LoggedUserService.username != null) {
-            User user = userService.findByUsername(LoggedUserService.username);
-            username.setText(user.getUsername());
-            password.setText(user.getPassword());
-            email.setText(user.getEmail());
+            currentUser = userService.findByUsername(LoggedUserService.username);
+            username.setText(currentUser.getUsername());
+            password.setText(currentUser.getPassword());
+            email.setText(currentUser.getEmail());
         }
     }
 
     private void saveUser() {
-
+        currentUser.setUsername(username.getText());
+        currentUser.setPassword(password.getText());
+        currentUser.setEmail(email.getText());
+        currentUser = userService.update(currentUser);
     }
 
     private void showAddJourneyPopUp() {
