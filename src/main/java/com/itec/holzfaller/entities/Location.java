@@ -1,5 +1,6 @@
 package com.itec.holzfaller.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ public class Location {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Long id;
 
     private String name;

@@ -1,5 +1,7 @@
 package com.itec.holzfaller.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,6 +10,7 @@ public class Journey {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)

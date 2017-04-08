@@ -1,5 +1,7 @@
 package com.itec.holzfaller.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,6 +10,7 @@ public class User {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Long id;
 
     private String username;
