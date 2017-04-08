@@ -1,5 +1,7 @@
 package com.itec.holzfaller.services;
 
+import com.itec.holzfaller.entities.User;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -18,7 +20,10 @@ public class SendEmailService {
     private final static String FROM_EMAIL_ADDRESS = "text.email.itec@gmail.com";
     private final static String EMAIL_PASSWORD = "iTec2017";
 
+    private UserService userService = new UserService();
+
     public void sendStringReportTo(String username){
+        User user = userService.findByUsername(username);
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -37,7 +42,7 @@ public class SendEmailService {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("FROM_EMAIL_ADDRESS"));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("bugariurz@gmail.com"));
+                    InternetAddress.parse(user.getEmail()));
             message.setSubject("Report from be-travel");
 
             Multipart multipart = new MimeMultipart();

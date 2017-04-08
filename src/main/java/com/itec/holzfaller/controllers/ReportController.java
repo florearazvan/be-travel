@@ -10,10 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
 import java.util.stream.Collectors;
 
@@ -49,6 +46,10 @@ public class ReportController {
     private void initComboBox() {
         ObservableList<String> users = FXCollections.observableArrayList(userService.findAll().stream().map(User::getUsername).collect(Collectors.toList()));
         userList.setItems(users);
+        if(LoggedUserService.isConsultant()){
+            userList.setDisable(true);
+            userList.setValue(LoggedUserService.loggedUser.getUsername());
+        }
     }
 
     private void initButton(){
@@ -59,7 +60,15 @@ public class ReportController {
             reportForUser.setText(reportService.getStringReport(usernameForReport));
             sendEmail.setDisable(false);
             sendEmail.setText("Send the report through e-mail to " + usernameForReport);
-            sendEmail.setOnAction( event1 -> sendEmail(usernameForReport));
+            sendEmail.setOnAction( event1 ->{
+                sendEmail(usernameForReport);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Email sent!");
+
+                alert.showAndWait();
+            });
         });
     }
 

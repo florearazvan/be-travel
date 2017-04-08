@@ -11,25 +11,31 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.ComboBox?>
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.112" prefHeight="450.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.itec.holzfaller.controllers.ProfileController">
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8.0.112" prefHeight="500.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.itec.holzfaller.controllers.ProfileController">
 
     <HBox alignment="CENTER">
         <Label text="Username: " />
         <TextField fx:id="username" />
     </HBox>
-    <Region prefHeight="20" prefWidth="Infinity" />
     <HBox alignment="CENTER">
         <Label text="Password: " />
         <TextField fx:id="password" />
     </HBox>
-    <Region prefHeight="20" prefWidth="Infinity" />
     <HBox alignment="CENTER">
         <Label text="Email: " />
         <TextField fx:id="email" />
     </HBox>
-    <Region prefHeight="20" prefWidth="Infinity" />
-    <ComboBox fx:id="locationsComboBox" />
-    <Region prefHeight="20" prefWidth="Infinity" />
+
+    <HBox alignment="CENTER">
+        <Label text="Location: " />
+        <ComboBox fx:id="locationsComboBox" />
+    </HBox>
+
+    <HBox alignment="CENTER">
+        <Label text="Role: " />
+        <ComboBox fx:id="rolesComboBox" />
+    </HBox>
+
     <TableView fx:id="journeysTable" prefHeight="200.0" prefWidth="Infinity">
         <columns>
             <TableColumn fx:id="location" prefWidth="110.0" text="Location" />
@@ -39,8 +45,7 @@
         </columns>
     </TableView>
     <Hyperlink fx:id="addJourneyLink" text="Add journey..." />
-    <Region prefHeight="30" prefWidth="Infinity" />
+
     <Button fx:id="saveButton" disable="true" text="Save" />
-    <Region prefHeight="10" prefWidth="Infinity" />
 
 </VBox>

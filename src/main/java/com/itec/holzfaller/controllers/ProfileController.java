@@ -56,6 +56,9 @@ public class ProfileController{
     @FXML
     private ComboBox<Location> locationsComboBox;
 
+    @FXML
+    private ComboBox<Role> rolesComboBox;
+
     private static Stage currentStage;
 
     private User currentUser;
@@ -67,7 +70,8 @@ public class ProfileController{
             currentUser = new User();
             currentUser.setJourneys(new ArrayList<>());
         }
-        initComboBox();
+        initLocationComboBox();
+        initRolesComboBox();
         populateFields();
         populateTable();
         saveButton.setOnAction(event -> saveUser());
@@ -75,16 +79,20 @@ public class ProfileController{
         addChangeListeners();
     }
 
-    private void initComboBox() {
+    private void initLocationComboBox() {
         ObservableList<Location> locationsList = FXCollections.observableArrayList(locationRepo.findAll());
         locationsComboBox.setItems(locationsList);
         locationsComboBox.setValue(currentUser.getLocation());
-        locationsComboBox.valueProperty().addListener(new ChangeListener<Location>() {
-            @Override
-            public void changed(ObservableValue<? extends Location> observable, Location oldValue, Location newValue) {
-                enableSaveButton();
-            }
-        });
+        locationsComboBox.valueProperty().addListener((observable, oldValue, newValue) -> enableSaveButton());
+    }
+
+    private void initRolesComboBox(){
+        ObservableList<Role> roles = FXCollections.observableArrayList();
+        roles.addAll(Role.ADMIN, Role.CONSULTANT);
+        rolesComboBox.setItems(roles);
+        rolesComboBox.valueProperty().addListener((observable, oldValue, newValue) -> enableSaveButton());
+        rolesComboBox.setDisable(LoggedUserService.isConsultant());
+        rolesComboBox.setValue(currentUser.getRole());
     }
 
     private void populateTable() {
@@ -155,9 +163,7 @@ public class ProfileController{
         currentUser.setUsername(username.getText());
         currentUser.setPassword(password.getText());
         currentUser.setEmail(email.getText());
-        if(currentUser.getId() == null) {
-            currentUser.setRole(Role.CONSULTANT);
-        }
+        currentUser.setRole(rolesComboBox.getValue());
         currentUser.setLocation(locationsComboBox.getValue());
         currentUser = userService.update(currentUser);
         currentStage.close();

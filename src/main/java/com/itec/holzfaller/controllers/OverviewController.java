@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -77,10 +78,18 @@ public class OverviewController {
     }
 
     public void export() {
+        String messageInDialog;
         try {
             exportService.export(null);
+            messageInDialog = "Data exported successfully!";
         } catch (IOException e) {
-            e.printStackTrace();
+            messageInDialog = "Something went wrong!";
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText(messageInDialog);
+
+        alert.showAndWait();
     }
 }

@@ -16,20 +16,21 @@ public class ImportService {
     UserService userService = new UserService();
 
     public boolean importJson(File file){
+        try {
         Gson gson = new Gson();
         Users users = null;
-        try {
-            if (file != null && file.getPath() != null) {
-                users = gson.fromJson(new FileReader(file.getPath()), Users.class);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
+        if (file != null && file.getPath() != null) {
+            users = gson.fromJson(new FileReader(file.getPath()), Users.class);
         }
         if(users != null){
             for(User user : users.getUsers()){
                 userService.save(user);
             }
             return true;
+        }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
         return false;
     }
