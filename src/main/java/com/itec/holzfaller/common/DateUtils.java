@@ -1,6 +1,9 @@
 package com.itec.holzfaller.common;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class DateUtils {
@@ -10,4 +13,13 @@ public class DateUtils {
         return simpleDateFormat.format(date);
     }
 
+    public static Date getDateFromLocalDate(LocalDate localDate){
+        return Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
+    }
+
+    public static boolean before(Date before, Date after) {
+        org.joda.time.LocalDate beforeDate = new org.joda.time.LocalDate(before);
+        org.joda.time.LocalDate afterDate = new org.joda.time.LocalDate(after);
+        return beforeDate.compareTo(afterDate) <= 0;
+    }
 }

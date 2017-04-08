@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 
 public class BeTravelApplication extends Application {
@@ -38,7 +39,7 @@ public class BeTravelApplication extends Application {
         Location ams = new Location("Amsterdam", 52.34, 4.75, "#ff8000");
         Location hun = new Location("Hunedoara", 45.76, 22.87, "#ff8000");
 
-        locationRepo.save(muc);
+        muc = locationRepo.update(muc);
         tm = locationRepo.update(tm);
         locationRepo.save(frk);
         locationRepo.save(wien);
@@ -49,7 +50,7 @@ public class BeTravelApplication extends Application {
         if (userRepo.findByUsername("admin") == null) {
             User defaultUser = new User("admin", "admin", "admin@itec.com", Role.ADMIN);
             defaultUser.setJourneys(
-                    Arrays.asList(new Journey(new Date(), new Date(), 10.0, tm),
+                    Arrays.asList(new Journey(nextDay(), nextWeek(), 10.0, tm),
                             new Journey(new Date(), new Date(), 10.0, hun)));
             defaultUser.setLocation(tm);
             userRepo.update(defaultUser);
@@ -57,10 +58,22 @@ public class BeTravelApplication extends Application {
 
         if (userRepo.findByUsername("user") == null) {
             User consultant = new User("user", "user", "user@itec.com", Role.CONSULTANT);
-            consultant.setJourneys(Arrays.asList(new Journey(new Date(), new Date(), 10.0, hun)));
+            consultant.setJourneys(Arrays.asList(new Journey(new Date(), new Date(), 10.0, muc)));
             consultant.setLocation(hun);
             userRepo.update(consultant);
         }
+    }
+
+    private static Date nextDay() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 1);
+        return cal.getTime();
+    }
+
+    private static Date nextWeek() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 7);
+        return cal.getTime();
     }
 
     @Override

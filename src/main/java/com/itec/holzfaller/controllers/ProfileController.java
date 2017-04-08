@@ -1,5 +1,6 @@
 package com.itec.holzfaller.controllers;
 
+import com.itec.holzfaller.common.DateUtils;
 import com.itec.holzfaller.common.LoggedUserService;
 import com.itec.holzfaller.entities.Journey;
 import com.itec.holzfaller.entities.Location;
@@ -169,8 +170,8 @@ public class ProfileController{
         grid.add(costTextField,1, 3);
 
         dialog.setResultConverter(addJurneyButton -> {
-            Date start = getDate(startDate.getValue());
-            Date end = getDate(endDate.getValue());
+            Date start = DateUtils.getDateFromLocalDate(startDate.getValue());
+            Date end = DateUtils.getDateFromLocalDate(endDate.getValue());
             Location location = comboBox.getValue();
             Double cost = Double.parseDouble(costTextField.getText());
             return  new Journey(start, end, cost, location);
@@ -179,10 +180,6 @@ public class ProfileController{
         dialog.getDialogPane().setContent(grid);
         Optional<Journey> journey = dialog.showAndWait();
         return journey.get();
-    }
-
-    private Date getDate(LocalDate localDate){
-        return Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
     }
 
     public static void showMe(){
