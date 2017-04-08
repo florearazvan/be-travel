@@ -158,7 +158,7 @@ public class ProfileController{
         dialog.setHeaderText("Add new journey");
 
         ButtonType addButton = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(addButton, ButtonType.CANCEL);
+        dialog.getDialogPane().getButtonTypes().addAll(addButton);
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -198,7 +198,7 @@ public class ProfileController{
         try {
             root = FXMLLoader.load(ProfileController.class.getClassLoader().getResource("ui/profile.fxml"));
             currentStage = new Stage();
-            currentStage.setTitle(LoggedUserService.username + "'s profile");
+            currentStage.setTitle(LoggedUserService.username.equals("") ? "Create new profile" : LoggedUserService.username + "'s profile");
             currentStage.setScene(new Scene(root, 450, 450));
             currentStage.show();
         }

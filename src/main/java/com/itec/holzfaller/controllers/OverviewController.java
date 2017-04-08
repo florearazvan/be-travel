@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,7 +29,11 @@ public class OverviewController {
         if (LoggedUserService.isConsultant()) {
             viewUsers.setVisible(false);
         }
-        loggedinUser.setOnMouseClicked(event -> switchProfileView());
+        loggedinUser.setOnMouseClicked((MouseEvent event) ->{
+            if (event.getClickCount() == 2) {
+                switchProfileView();
+            }
+        });
     }
 
     public void switchToUsersView(ActionEvent actionEvent) {

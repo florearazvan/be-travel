@@ -32,19 +32,29 @@ public class BeTravelApplication extends Application {
 
     private static void initDB() {
         LocationRepo locationRepo = new LocationRepo();
-        Location muc = new Location("München", 48.15, 11.26, "#2c5d9d");
-        Location tm = new Location("Timișoara", 45.74, 21.14, "#bcdf46");
-        Location frk = new Location("Frankfurt am Main", 50.12, 8.49, "#a31919");
-        Location wien = new Location("Wien", 48.22, 16.09, "#0c6e48");
-        Location ams = new Location("Amsterdam", 52.34, 4.75, "#ff8000");
-        Location hun = new Location("Hunedoara", 45.76, 22.87, "#ff8000");
+        Location muc;
+        Location tm;
+        Location hun;
+        if (locationRepo.findAll().size() == 0){
+            muc = new Location("München", 48.15, 11.26, "#2c5d9d");
+            tm = new Location("Timișoara", 45.74, 21.14, "#bcdf46");
+            Location frk = new Location("Frankfurt am Main", 50.12, 8.49, "#a31919");
+            Location wien = new Location("Wien", 48.22, 16.09, "#0c6e48");
+            Location ams = new Location("Amsterdam", 52.34, 4.75, "#ff8000");
+            hun = new Location("Hunedoara", 45.76, 22.87, "#ff8000");
 
-        muc = locationRepo.update(muc);
-        tm = locationRepo.update(tm);
-        locationRepo.save(frk);
-        locationRepo.save(wien);
-        locationRepo.save(ams);
-        hun = locationRepo.update(hun);
+            muc = locationRepo.update(muc);
+            tm = locationRepo.update(tm);
+            locationRepo.save(frk);
+            locationRepo.save(wien);
+            locationRepo.save(ams);
+            hun = locationRepo.update(hun);
+    } else
+    {
+        muc = locationRepo.findAll().stream().filter(location -> location.getName().equals("München")).findFirst().get();
+        tm = locationRepo.findAll().stream().filter(location -> location.getName().equals("Timișoara")).findFirst().get();
+        hun = locationRepo.findAll().stream().filter(location -> location.getName().equals("Hunedoara")).findFirst().get();
+    }
 
         UserRepo userRepo = new UserRepo();
         if (userRepo.findByUsername("admin") == null) {
