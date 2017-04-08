@@ -118,7 +118,7 @@ public class ReportService {
         result = result.concat(String.format("%s\t\t%s\t%s\t\t%s","Location", "Start Date", "End Date", "Cost"));
 
         for(Journey journey : user.getJourneys()){
-            String line = String.format("%s\t\t%s\t%s\t\t%s", journey.getLocation().toString(), DateUtils.dateToString(journey.getStartDate()), DateUtils.dateToString(journey.getEndDate()), journey.getCost() + "");
+            String line = String.format("%s\t%s\t%s\t%s", journey.getLocation().toString(), DateUtils.dateToString(journey.getStartDate()), DateUtils.dateToString(journey.getEndDate()), journey.getCost() + "");
             result = result.concat("\n");
             result = result.concat(line);
         }
