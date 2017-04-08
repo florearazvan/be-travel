@@ -15,4 +15,6 @@ public class LoggedUserService {
         return loggedUser.getRole() == Role.CONSULTANT;
     }
 
+    public static String username;
+
 }

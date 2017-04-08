@@ -18,7 +18,7 @@
                   </font></Label>
                 <VBox fx:id="navigation">
                     <Button fx:id="viewUsers" onAction="#switchToUsersView">Users</Button>
-                    <Button onAction="#switchToMapView">Map</Button>
+                    <Button onAction="#switchProfileView">Map</Button>
                 </VBox>
             </SplitPane>
             <VBox fx:id="content">
