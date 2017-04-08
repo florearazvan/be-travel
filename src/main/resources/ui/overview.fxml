@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.itec.holzfaller.controllers.OverviewController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.itec.holzfaller.controllers.OverviewController">
    <children>
-      <SplitPane fx:id="splitPane" dividerPositions="0.3" prefHeight="400.0" prefWidth="800.0">
+      <SplitPane fx:id="splitPane" dividerPositions="0.15" prefHeight="600.0" prefWidth="1000.0">
         <items>
             <SplitPane dividerPositions="0.1" orientation="VERTICAL">
                 <Label fx:id="loggedinUser" text="SDSADSD">
