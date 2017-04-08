@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -25,6 +26,9 @@ import java.util.stream.Collectors;
 import static com.itec.holzfaller.common.DateUtils.*;
 
 public class MapController implements Initializable, MapComponentInitializedListener, DirectionsServiceCallback {
+
+    @FXML
+    private HBox filterContainer;
 
     @FXML
     private DatePicker endDatePicker;
@@ -95,6 +99,9 @@ public class MapController implements Initializable, MapComponentInitializedList
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (LoggedUserService.isConsultant()) {
+            filterContainer.getChildren().remove(usernameTextField);
+        }
         mapView.addMapInializedListener(this);
     }
 
