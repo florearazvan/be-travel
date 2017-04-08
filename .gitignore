@@ -3,3 +3,4 @@
 target
 *.iml
 src/main/resources/database
+src/main/resources/*.json
