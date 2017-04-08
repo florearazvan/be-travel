@@ -1,5 +1,7 @@
 package com.itec.holzfaller.entities;
 
+import com.lynden.gmapsfx.javascript.object.LatLong;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,13 +14,16 @@ public class Location {
     private long id;
 
     private String name;
+    private double latitude;
+    private double longitude;
 
-    //TODO add latitude/longitude & maybe user relation???
     public Location() {
     }
 
-    public Location(String name) {
+    public Location(String name, double latitude, double longitude) {
         this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public long getId() {
@@ -42,4 +47,23 @@ public class Location {
         return name;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public LatLong computeLatLong() {
+        return new LatLong(latitude, longitude);
+    }
 }
