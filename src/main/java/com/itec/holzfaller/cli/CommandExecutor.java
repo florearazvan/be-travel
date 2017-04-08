@@ -1,9 +1,6 @@
 package com.itec.holzfaller.cli;
 
-import com.itec.holzfaller.cli.commands.Command;
-import com.itec.holzfaller.cli.commands.EditUserCommand;
-import com.itec.holzfaller.cli.commands.ListUsers;
-import com.itec.holzfaller.cli.commands.LoginCommand;
+import com.itec.holzfaller.cli.commands.*;
 
 import java.util.Arrays;
 
@@ -31,6 +28,15 @@ public class CommandExecutor {
 
             case Commands.EDIT_USER:
                 return new EditUserCommand();
+
+            case Commands.EDIT_LOCATION:
+                return new EditUserLocationCommand();
+
+            case Commands.ADD_USER:
+                return new CreateUserCommand();
+
+            case Commands.DELETE_USER:
+                return new DeleteUserCommand();
 
             case Commands.EXIT:
                 System.out.println("bye bye...");

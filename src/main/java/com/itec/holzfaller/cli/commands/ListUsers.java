@@ -39,9 +39,14 @@ public class ListUsers implements Command {
     }
 
     private void print(List<User> users) {
-        System.out.println("Username \t Email");
+        System.out.println("Username \t Email \t Location \t Role");
         users.forEach(user -> {
-            System.out.println(user.getUsername() + "\t" + user.getEmail());
+            System.out.println(user.getUsername() + "\t" + user.getEmail() + "\t" + getLocation(user) + " " +
+                    user.getRole());
         });
+    }
+
+    private String getLocation(User user) {
+        return user.getLocation() == null ? "No where" : user.getLocation().toString();
     }
 }
