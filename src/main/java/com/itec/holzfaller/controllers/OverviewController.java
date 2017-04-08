@@ -63,4 +63,8 @@ public class OverviewController {
         ProfileController.showMe();
     }
 
+    public void switchReportView(ActionEvent actionEvent) {
+        System.out.println("switching to reports...");
+        changeTo("ui/report.fxml");
+    }
 }

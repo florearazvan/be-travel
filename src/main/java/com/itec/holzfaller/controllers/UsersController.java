@@ -68,7 +68,7 @@ public class UsersController {
         alert.setHeaderText("Look, a Confirmation Dialog with Custom Actions");
         alert.setContentText("Choose your option.");
 
-        ButtonType buttonEdit = new ButtonType("Edit");
+        ButtonType buttonEdit = new ButtonType("View/Edit");
         ButtonType buttonDelete = new ButtonType("Delete");
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
