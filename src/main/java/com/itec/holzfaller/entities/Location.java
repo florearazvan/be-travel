@@ -16,13 +16,15 @@ public class Location {
     private String name;
     private double latitude;
     private double longitude;
+    private String color;
 
     public Location() {
     }
 
-    public Location(String name, double latitude, double longitude) {
+    public Location(String name, double latitude, double longitude, String color) {
         this.name = name;
         this.latitude = latitude;
+        this.color = color;
         this.longitude = longitude;
     }
 
@@ -65,5 +67,13 @@ public class Location {
 
     public LatLong computeLatLong() {
         return new LatLong(latitude, longitude);
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

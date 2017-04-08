@@ -33,16 +33,16 @@ public class BeTravelApplication extends Application {
         if (userRepo.findByUsername("admin") == null) {
             User defaultUser = new User("admin", "admin", "admin@itec.com", Role.ADMIN);
             defaultUser.setJourneys(
-                    Arrays.asList(new Journey(new Date(), new Date(), 10.0, new Location("Timisoara", 45.7494, 21.2272)),
-                            new Journey(new Date(), new Date(), 10.0, new Location("Hunedoara", 45.77, 22.92))));
-            defaultUser.setLocation(new Location("Timisoara", 45.7494, 21.2272));
+                    Arrays.asList(new Journey(new Date(), new Date(), 10.0, new Location("Timisoara", 45.7494, 21.2272, Constants.RED)),
+                            new Journey(new Date(), new Date(), 10.0, new Location("Hunedoara", 45.77, 22.92, Constants.BLUE))));
+            defaultUser.setLocation(new Location("Timisoara", 45.7494, 21.2272, Constants.RED));
             userRepo.save(defaultUser);
         }
 
         if (userRepo.findByUsername("user") == null) {
             User consultant = new User("user", "user", "user@itec.com", Role.CONSULTANT);
-            consultant.setJourneys(Arrays.asList(new Journey(new Date(), new Date(), 10.0, new Location("Hunedoara", 45.77, 22.92))));
-            consultant.setLocation(new Location("Hunedoara",45.77, 22.92));
+            consultant.setJourneys(Arrays.asList(new Journey(new Date(), new Date(), 10.0, new Location("Hunedoara", 45.77, 22.92, Constants.BLUE))));
+            consultant.setLocation(new Location("Hunedoara",45.77, 22.92, Constants.BLUE));
             userRepo.save(consultant);
         }
     }
