@@ -1,5 +1,6 @@
 package com.itec.holzfaller.controllers;
 
+import com.itec.holzfaller.common.LoggedUserService;
 import com.itec.holzfaller.entities.User;
 import com.itec.holzfaller.services.UserService;
 import javafx.collections.FXCollections;
@@ -33,7 +34,8 @@ public class UsersController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2) {
                     User clickedUser = row.getItem();
-                    System.out.println(clickedUser.getUsername());
+                    LoggedUserService.username = clickedUser.getUsername();
+                    ProfileController.showMe();
                 }
             });
 

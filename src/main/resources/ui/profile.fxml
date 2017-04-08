@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
@@ -12,17 +16,17 @@
 
     <HBox alignment="CENTER">
         <Label text="Username: " />
-        <Label fx:id="username" />
+        <TextField fx:id="username" />
     </HBox>
     <Region prefHeight="20" prefWidth="Infinity" />
     <HBox alignment="CENTER">
         <Label text="Password: " />
-        <Label fx:id="password" />
+        <TextField fx:id="password" />
     </HBox>
     <Region prefHeight="20" prefWidth="Infinity" />
     <HBox alignment="CENTER">
         <Label text="Email: " />
-        <Label fx:id="email" />
+        <TextField fx:id="email" />
     </HBox>
     <Region prefHeight="20" prefWidth="Infinity" />
     <TableView fx:id="journeysTable" prefHeight="200.0" prefWidth="Infinity">
@@ -33,4 +37,9 @@
             <TableColumn fx:id="cost" prefWidth="90.0" text="Cost" />
         </columns>
     </TableView>
+    <Hyperlink fx:id="addJourneyLink" text="Add journey..." />
+    <Region prefHeight="30" prefWidth="Infinity" />
+    <Button fx:id="saveButton" disable="true" text="Save" />
+    <Region prefHeight="10" prefWidth="Infinity" />
+
 </VBox>

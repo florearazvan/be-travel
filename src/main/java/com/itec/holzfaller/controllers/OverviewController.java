@@ -54,8 +54,8 @@ public class OverviewController {
     }
 
     private void switchProfileView() {
-        changeTo("ui/profile.fxml");
         LoggedUserService.username = loggedinUser.getText();
+        ProfileController.showMe();
     }
 
 }
