@@ -1,5 +1,6 @@
-package com.itec.holzfaller.cli.commands;
+package com.itec.holzfaller.cli.commands.user;
 
+import com.itec.holzfaller.cli.commands.Command;
 import com.itec.holzfaller.common.LoggedUserService;
 import com.itec.holzfaller.entities.User;
 import com.itec.holzfaller.services.UserService;

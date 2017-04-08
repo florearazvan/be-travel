@@ -1,6 +1,7 @@
 package com.itec.holzfaller.cli;
 
 import com.itec.holzfaller.cli.commands.*;
+import com.itec.holzfaller.cli.commands.user.*;
 
 import java.util.Arrays;
 

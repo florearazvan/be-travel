@@ -1,5 +1,6 @@
-package com.itec.holzfaller.cli.commands;
+package com.itec.holzfaller.cli.commands.user;
 
+import com.itec.holzfaller.cli.commands.Command;
 import com.itec.holzfaller.common.LoggedUserService;
 import com.itec.holzfaller.entities.User;
 import com.itec.holzfaller.services.UserService;
@@ -7,7 +8,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
-public class EditUserCommand implements Command{
+public class EditUserCommand implements Command {
 
     private Options options = new Options();
     private UserService userService = new UserService();
