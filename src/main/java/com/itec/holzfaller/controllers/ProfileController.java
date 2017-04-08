@@ -62,6 +62,8 @@ public class ProfileController{
         currentUser = userService.findByUsername(LoggedUserService.username);
         populateFields();
         populateTable();
+        saveButton.setOnAction(event -> saveUser());
+        addJourneyLink.setOnAction(event -> showAddJourneyPopUp());
         addChangeListeners();
     }
 
@@ -72,9 +74,30 @@ public class ProfileController{
         ObservableList<Journey> data =
                 FXCollections.observableArrayList(currentUser.getJourneys());
         journeysTable.setItems(data);
-        saveButton.setOnAction(event -> saveUser());
-        addJourneyLink.setOnAction(event -> showAddJourneyPopUp());
+        journeysTable.setRowFactory(table -> {
+            TableRow<Journey> row = new TableRow<>();
 
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2) {
+                    delete(row.getItem());
+                }
+            });
+            return row;
+        });
+    }
+
+    private void delete(Journey journey) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete journey");
+        alert.setHeaderText("Are you sure you want to delete this journey? ");
+        alert.setContentText("City:" + journey.getLocation().getName() +"\n" + "Start date:" + journey.getStartDate() + "\n" + "End date" + journey.getEndDate());
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            currentUser.getJourneys().remove(journey);
+            enableSaveButton();
+            populateTable();
+        }
     }
 
     private void addChangeListeners() {
@@ -114,7 +137,7 @@ public class ProfileController{
         Journey newJourney = showPopupAndCreateJourney();
         currentUser.getJourneys().add(newJourney);
         populateTable();
-        saveButton.setDisable(false);
+        enableSaveButton();
     }
 
     private Journey showPopupAndCreateJourney() {
