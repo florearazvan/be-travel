@@ -38,6 +38,7 @@ public class UsersController {
         List<User> allUsers = userService.findAll();
 
         for (TableColumn column : usersTable.getColumns()) {
+            column.prefWidthProperty().bind(usersTable.widthProperty().multiply(0.25));
             column.setCellValueFactory(new PropertyValueFactory<User, StringJoiner>(column.getId()));
         }
         ObservableList<User> data = FXCollections.observableArrayList(allUsers);

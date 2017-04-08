@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Hyperlink?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.itec.holzfaller.controllers.UsersController">
+<VBox maxHeight="-Infinity" spacing="20" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.itec.holzfaller.controllers.UsersController">
     <TableView fx:id="usersTable">
         <columns>
-            <TableColumn fx:id="username" maxWidth="Infinity" prefWidth="319.0" text="Username" />
-            <TableColumn fx:id="email" maxWidth="Infinity" prefWidth="276.0" text="Email" />
-            <TableColumn fx:id="role" maxWidth="Infinity" prefWidth="276.0" text="Role" />
-            <TableColumn fx:id="location" maxWidth="Infinity" prefWidth="276.0" text="Location" />
+            <TableColumn fx:id="username" text="Username" />
+            <TableColumn fx:id="email"  text="Email" />
+            <TableColumn fx:id="role"  text="Role" />
+            <TableColumn fx:id="location" text="Location" />
         </columns>
     </TableView>
     <Hyperlink fx:id="addUser" text="Add new user..." />

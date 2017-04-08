@@ -1,32 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.itec.holzfaller.controllers.OverviewController">
-   <children>
-      <SplitPane fx:id="splitPane" dividerPositions="0.15" prefHeight="600.0" prefWidth="1000.0">
-        <items>
-            <SplitPane dividerPositions="0.1" orientation="VERTICAL">
-                <Label fx:id="loggedinUser" text="SDSADSD">
-                  <font>
-                     <Font size="18.0" />
-                  </font></Label>
-                <VBox fx:id="navigation">
-                    <Button fx:id="viewUsers" onAction="#switchToUsersView">Users</Button>
-                    <Button onAction="#switchProfileView">Map</Button>
-                    <Button onAction="#switchReportView">Report</Button>
-                    <Button onAction="#switchImportView">Import</Button>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.itec.holzfaller.controllers.OverviewController">
+    <HBox AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+       <children>
+          <SplitPane fx:id="splitPane" dividerPositions="0.15" prefHeight="600.0" prefWidth="1000.0" >
+            <items>
+                <SplitPane dividerPositions="0.2" orientation="VERTICAL">
+                    <VBox alignment="CENTER">
+                    <Label fx:id="loggedinUser" text="SDSADSD">
+                      <font>
+                         <Font size="18.0" />
+                      </font></Label>
+                    </VBox>
+                    <VBox fx:id="navigation" alignment="TOP_CENTER" spacing="10">
+                        <Label fx:id="viewUsers" onMouseClicked="#switchToUsersView" text="Users">
+                         <font>
+                            <Font size="18.0" />
+                         </font>
+                        </Label>
+                        <Label onMouseClicked="#switchMapView" text="Map"><font>
+                            <Font size="18.0" />
+                        </font></Label>
+                        <Label onMouseClicked="#switchReportView" text="Report"><font>
+                            <Font size="18.0" />
+                        </font></Label>
+                        <Label onMouseClicked="#switchImportView" text="Import"><font>
+                            <Font size="18.0" />
+                        </font></Label>
+                        <Label onMouseClicked="#export" text="Export"><font>
+                            <Font size="18.0" />
+                        </font></Label>
+                      <padding>
+                         <Insets top="10.0" />
+                      </padding>
+                    </VBox>
+                </SplitPane>
+                <VBox fx:id="content" alignment="CENTER">
+                    <ImageView>
+                      <image>
+                         <Image url="@../photo.png" />
+                      </image></ImageView>
                 </VBox>
-            </SplitPane>
-            <VBox fx:id="content">
-                <Label>Content</Label>
-            </VBox>
-        </items>
-      </SplitPane>
-   </children>
-</HBox>
+            </items>
+          </SplitPane>
+       </children>
+    </HBox>
+</AnchorPane>

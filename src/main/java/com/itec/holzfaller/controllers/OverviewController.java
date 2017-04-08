@@ -1,6 +1,7 @@
 package com.itec.holzfaller.controllers;
 
 import com.itec.holzfaller.common.LoggedUserService;
+import com.itec.holzfaller.services.UserExportService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,11 +16,13 @@ import java.net.URL;
 
 public class OverviewController {
 
+    UserExportService exportService = new UserExportService();
+
     @FXML
     private SplitPane splitPane;
 
     @FXML
-    private Button viewUsers;
+    private Label viewUsers;
 
     @FXML
     private Label loggedinUser;
@@ -36,12 +39,12 @@ public class OverviewController {
         });
     }
 
-    public void switchToUsersView(ActionEvent actionEvent) {
+    public void switchToUsersView() {
         System.out.println("switching to users...");
         changeTo("ui/users.fxml");
     }
 
-    public void switchProfileView(ActionEvent actionEvent) {
+    public void switchMapView() {
         System.out.println("switching to map...");
         changeTo("ui/map.fxml");
     }
@@ -63,13 +66,21 @@ public class OverviewController {
         ProfileController.showMe();
     }
 
-    public void switchReportView(ActionEvent actionEvent) {
+    public void switchReportView() {
         System.out.println("switching to reports...");
         changeTo("ui/report.fxml");
     }
 
-    public void switchImportView(ActionEvent actionEvent) {
+    public void switchImportView() {
         System.out.println("switching to import...");
         changeTo("ui/import.fxml");
+    }
+
+    public void export() {
+        try {
+            exportService.export(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

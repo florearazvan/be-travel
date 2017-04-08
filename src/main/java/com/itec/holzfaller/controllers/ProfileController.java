@@ -4,6 +4,7 @@ import com.itec.holzfaller.common.DateUtils;
 import com.itec.holzfaller.common.LoggedUserService;
 import com.itec.holzfaller.entities.Journey;
 import com.itec.holzfaller.entities.Location;
+import com.itec.holzfaller.entities.Role;
 import com.itec.holzfaller.entities.User;
 import com.itec.holzfaller.repository.LocationRepo;
 import com.itec.holzfaller.services.UserService;
@@ -76,6 +77,7 @@ public class ProfileController{
 
     private void populateTable() {
         for(TableColumn column : journeysTable.getColumns()){
+            column.prefWidthProperty().bind(journeysTable.widthProperty().multiply(0.25));
             column.setCellValueFactory(new PropertyValueFactory<Journey, String>(column.getId()));
         }
         ObservableList<Journey> data =
@@ -141,6 +143,9 @@ public class ProfileController{
         currentUser.setUsername(username.getText());
         currentUser.setPassword(password.getText());
         currentUser.setEmail(email.getText());
+        if(currentUser.getId() == null) {
+            currentUser.setRole(Role.CONSULTANT);
+        }
         currentUser = userService.update(currentUser);
         currentStage.close();
     }
@@ -199,7 +204,7 @@ public class ProfileController{
             root = FXMLLoader.load(ProfileController.class.getClassLoader().getResource("ui/profile.fxml"));
             currentStage = new Stage();
             currentStage.setTitle(LoggedUserService.username.equals("") ? "Create new profile" : LoggedUserService.username + "'s profile");
-            currentStage.setScene(new Scene(root, 450, 450));
+            currentStage.setScene(new Scene(root));
             currentStage.show();
         }
         catch (IOException e) {

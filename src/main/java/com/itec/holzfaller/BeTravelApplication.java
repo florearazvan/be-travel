@@ -28,7 +28,7 @@ public class BeTravelApplication extends Application {
 
     public static void main(String[] args) {
         //TODO maybe here open another thread for the CLI
-//        initDB();
+        initDB();
         launch(args);
     }
 

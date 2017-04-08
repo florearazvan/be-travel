@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Hyperlink?>
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.itec.holzfaller.controllers.ReportController">
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.itec.holzfaller.controllers.ReportController">
     <HBox alignment="CENTER">
         <Label text="For user: " />
         <ComboBox fx:id="userList" />

@@ -19,7 +19,9 @@ public class ImportService {
         Gson gson = new Gson();
         Users users = null;
         try {
-            users = gson.fromJson(new FileReader(file.getPath()), Users.class);
+            if (file != null && file.getPath() != null) {
+                users = gson.fromJson(new FileReader(file.getPath()), Users.class);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
