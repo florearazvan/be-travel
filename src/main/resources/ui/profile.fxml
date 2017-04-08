@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ComboBox?>
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.112" prefHeight="450.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.itec.holzfaller.controllers.ProfileController">
 
     <HBox alignment="CENTER">
@@ -26,6 +27,8 @@
         <Label text="Email: " />
         <TextField fx:id="email" />
     </HBox>
+    <Region prefHeight="20" prefWidth="Infinity" />
+    <ComboBox fx:id="locationsComboBox" />
     <Region prefHeight="20" prefWidth="Infinity" />
     <TableView fx:id="journeysTable" prefHeight="200.0" prefWidth="Infinity">
         <columns>

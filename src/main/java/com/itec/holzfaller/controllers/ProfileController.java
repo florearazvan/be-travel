@@ -8,24 +8,20 @@ import com.itec.holzfaller.entities.Role;
 import com.itec.holzfaller.entities.User;
 import com.itec.holzfaller.repository.LocationRepo;
 import com.itec.holzfaller.services.UserService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-
 import java.io.IOException;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -57,6 +53,9 @@ public class ProfileController{
     @FXML
     private Button saveButton;
 
+    @FXML
+    private ComboBox<Location> locationsComboBox;
+
     private static Stage currentStage;
 
     private User currentUser;
@@ -68,11 +67,24 @@ public class ProfileController{
             currentUser = new User();
             currentUser.setJourneys(new ArrayList<>());
         }
+        initComboBox();
         populateFields();
         populateTable();
         saveButton.setOnAction(event -> saveUser());
         addJourneyLink.setOnAction(event -> showAddJourneyPopUp());
         addChangeListeners();
+    }
+
+    private void initComboBox() {
+        ObservableList<Location> locationsList = FXCollections.observableArrayList(locationRepo.findAll());
+        locationsComboBox.setItems(locationsList);
+        locationsComboBox.setValue(currentUser.getLocation());
+        locationsComboBox.valueProperty().addListener(new ChangeListener<Location>() {
+            @Override
+            public void changed(ObservableValue<? extends Location> observable, Location oldValue, Location newValue) {
+                enableSaveButton();
+            }
+        });
     }
 
     private void populateTable() {
@@ -146,6 +158,7 @@ public class ProfileController{
         if(currentUser.getId() == null) {
             currentUser.setRole(Role.CONSULTANT);
         }
+        currentUser.setLocation(locationsComboBox.getValue());
         currentUser = userService.update(currentUser);
         currentStage.close();
     }
