@@ -10,12 +10,12 @@ import org.apache.commons.cli.Options;
 
 import java.util.List;
 
-public class ListUsers implements Command {
+public class ListUsersCommand implements Command {
 
     private Options options = new Options();
     private UserService userService = new UserService();
 
-    public ListUsers() {
+    public ListUsersCommand() {
         Option allOption = new Option("a", "all", false, "All option");
         options.addOption(allOption);
     }

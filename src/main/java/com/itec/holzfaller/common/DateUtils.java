@@ -1,5 +1,6 @@
 package com.itec.holzfaller.common;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -21,5 +22,10 @@ public class DateUtils {
         org.joda.time.LocalDate beforeDate = new org.joda.time.LocalDate(before);
         org.joda.time.LocalDate afterDate = new org.joda.time.LocalDate(after);
         return beforeDate.compareTo(afterDate) <= 0;
+    }
+
+    public static Date parseDate(String startDate) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyy");
+        return simpleDateFormat.parse(startDate);
     }
 }

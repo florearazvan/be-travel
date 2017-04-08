@@ -1,4 +1,4 @@
-package com.itec.holzfaller.cli.commands.user;
+package com.itec.holzfaller.cli.commands.location;
 
 import com.itec.holzfaller.cli.commands.Command;
 import com.itec.holzfaller.common.Constants;
