@@ -1,16 +1,19 @@
 package com.itec.holzfaller.controllers;
 
+import com.itec.holzfaller.BeTravelApplication;
 import com.itec.holzfaller.common.LoggedUserService;
 import com.itec.holzfaller.services.UserExportService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,16 +31,43 @@ public class OverviewController {
     @FXML
     private Label loggedinUser;
 
+    @FXML
+    private Label importData;
+
+    @FXML
+    private Label exportData;
+
+    @FXML
+    private Label logout;
+
     public void initialize() {
         loggedinUser.setText(LoggedUserService.loggedUser.getUsername());
         if (LoggedUserService.isConsultant()) {
             viewUsers.setVisible(false);
+            importData.setVisible(false);
+            exportData.setVisible(false);
         }
         loggedinUser.setOnMouseClicked((MouseEvent event) ->{
             if (event.getClickCount() == 2) {
                 switchProfileView();
             }
         });
+        logout.setOnMouseClicked((MouseEvent) -> logout());
+    }
+
+    private void logout() {
+        try {
+            deleteUserCredentials();
+            Pane login = FXMLLoader.load(getClass().getClassLoader().getResource("ui/login.fxml"));
+            BeTravelApplication.changeScene("Login", new Scene(login));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteUserCredentials() {
+        LoggedUserService.username = "";
+        LoggedUserService.loggedUser = null;
     }
 
     public void switchToUsersView() {
