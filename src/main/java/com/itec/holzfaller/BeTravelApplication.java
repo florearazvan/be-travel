@@ -60,7 +60,7 @@ public class BeTravelApplication extends Application {
 
         UserRepo userRepo = new UserRepo();
         if (userRepo.findByUsername("admin") == null) {
-            User defaultUser = new User("admin", "admin", "admin@itec.com", Role.ADMIN);
+            User defaultUser = new User("admin", "admin", "razvan.rzv07@gmail.com", Role.ADMIN);
             defaultUser.setJourneys(
                     Arrays.asList(new Journey(nextDay(), nextWeek(), 10.0, tm),
                             new Journey(new Date(), new Date(), 10.0, hun)));
@@ -69,7 +69,7 @@ public class BeTravelApplication extends Application {
         }
 
         if (userRepo.findByUsername("user") == null) {
-            User consultant = new User("user", "user", "user@itec.com", Role.CONSULTANT);
+            User consultant = new User("user", "user", "razvan.rzv07@gmail.com", Role.CONSULTANT);
             consultant.setJourneys(Arrays.asList(new Journey(new Date(), new Date(), 10.0, muc)));
             consultant.setLocation(hun);
             userRepo.update(consultant);
