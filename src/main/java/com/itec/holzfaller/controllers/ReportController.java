@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import javax.mail.MessagingException;
 import java.util.stream.Collectors;
 
 /**
@@ -61,19 +62,23 @@ public class ReportController {
             sendEmail.setDisable(false);
             sendEmail.setText("Send the report through e-mail to " + usernameForReport);
             sendEmail.setOnAction( event1 ->{
-                sendEmail(usernameForReport);
+                String dialogContent = sendEmail(usernameForReport);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information Dialog");
                 alert.setHeaderText(null);
-                alert.setContentText("Email sent!");
+                alert.setContentText(dialogContent);
 
                 alert.showAndWait();
             });
         });
     }
 
-    private void sendEmail(String usernameForReport) {
-        sendEmailService.sendStringReportTo(usernameForReport);
+    private String sendEmail(String usernameForReport) {
+        try {
+            return sendEmailService.sendStringReportTo(usernameForReport);
+        } catch (MessagingException e) {
+            return "Email was not sent!";
+        }
     }
 
 }

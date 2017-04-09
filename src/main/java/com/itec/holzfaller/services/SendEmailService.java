@@ -6,10 +6,7 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
 import java.util.Properties;
 
 /**
@@ -22,7 +19,7 @@ public class SendEmailService {
 
     private UserService userService = new UserService();
 
-    public void sendStringReportTo(String username){
+    public String sendStringReportTo(String username) throws MessagingException {
         User user = userService.findByUsername(username);
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -37,7 +34,6 @@ public class SendEmailService {
                     }
                 });
 
-        try {
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("FROM_EMAIL_ADDRESS"));
@@ -59,12 +55,7 @@ public class SendEmailService {
 
             Transport.send(message);
 
-            System.out.println("Email sent");
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
+            return "Email sent!";
 
     }
 }
